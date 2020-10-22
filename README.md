@@ -154,7 +154,7 @@ SELECT @str;
 Câu lệnh IF
 ```mysql
 IF expression THEN commands
-[ELSE IF expression THEN commands]
+[ELSEIF expression THEN commands]
 [ELSE commands]
 END IF;
 ```
