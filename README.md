@@ -201,3 +201,30 @@ Xóa function
 ```mysql
 DROP FUNCTION [IF EXISTS] name;
 ```
+
+Ví dụ
+```mysql
+CREATE FUNCTION dbo.ufnGetInventoryStock(@ProductID int)  
+RETURNS int   
+AS   
+-- Returns the stock level for the product.  
+BEGIN  
+    DECLARE @ret int;  
+    SELECT @ret = SUM(p.Quantity)   
+    FROM Production.ProductInventory p   
+    WHERE p.ProductID = @ProductID   
+        AND p.LocationID = '6';  
+     IF (@ret IS NULL)   
+        SET @ret = 0;  
+    RETURN @ret;  
+END; 
+```
+
+Function và Procedure
+
+||Procedure|Function|
+|----------------|-------------------------------|----------------------------------|
+|Thực thi| CALL satement | SQL satement: SELECT, UPDATE, ...|
+|Giá trị trả về| Có thể một hoặc nhiều giá trị| Chỉ giá trị trả về thông qua RETURN|
+|Tham số| IN, OUT, INOUT| Chỉ truyền tham trị|
+|Sử dụng proc/function| Một proc có thể dùng proc hay function bên trong nó| Chỉ sử dụng function bên trong nó|
