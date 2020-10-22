@@ -204,20 +204,20 @@ DROP FUNCTION [IF EXISTS] name;
 
 Ví dụ
 ```mysql
-CREATE FUNCTION dbo.ufnGetInventoryStock(@ProductID int)  
-RETURNS int   
-AS   
--- Returns the stock level for the product.  
-BEGIN  
-    DECLARE @ret int;  
-    SELECT @ret = SUM(p.Quantity)   
-    FROM Production.ProductInventory p   
-    WHERE p.ProductID = @ProductID   
-        AND p.LocationID = '6';  
-     IF (@ret IS NULL)   
-        SET @ret = 0;  
-    RETURN @ret;  
-END; 
+# increase Number by step Function
+DELIMITER $$
+DROP FUNCTION IF EXISTS increase $$
+CREATE FUNCTION increase(_number INT)
+RETURNS INT 
+BEGIN 
+    DECLARE step INT DEFAULT 0;
+    SET step = 2;
+    SET _number = _number + step;
+    RETURN _number;
+END $$
+DELIMITER ;
+
+SELECT increase(5);
 ```
 
 Function và Procedure
