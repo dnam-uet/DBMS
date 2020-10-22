@@ -38,7 +38,7 @@ SELECT data FROM view_name
 ```mysql
 # Change end query default
 DELIMITER //  
-CREATE PROCEDURE sp_name
+CREATE PROCEDURE sp_name()
 
 	BEGIN
 	SELECT * FROM products;
