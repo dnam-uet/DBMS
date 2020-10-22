@@ -5,21 +5,20 @@
 #### 1.1 Create View
 
 ``` mysql
-  CREATE VIEW view_name AS
-   query
+  	CREATE VIEW view_name AS query
 ```
 
 #### 1.2 Drop view
 
 ```mysql
-  DROP VIEW view_name;
+  	DROP VIEW view_name;
 ```
 #### 1.3 Use view
 
 Write query
 
 ``` mysql
-  SELECT data FROM view_name
+  	SELECT data FROM view_name
 ```
 
 ## 2. Procedure
@@ -27,9 +26,9 @@ Write query
 ### Ưu điểm
 
   * Tăng hiệu năng của ứng dụng. Chỉ cần khởi tạo 1 lần, được lưu trong database. 
-	* Chạy nhanh hơn câu lệnh SQL thường chưa được biên dịch
+  * Chạy nhanh hơn câu lệnh SQL thường chưa được biên dịch
   * Giảm tải cho server, có tính tái sử dụng cao
-	* Bảo mật do admin có thể cho phép các ứng dụng truy cập và lấy dữ liệu thông qua procedure mà k cấp quyền truy cập cơ sở dữ liệu
+  * Bảo mật do admin có thể cho phép các ứng dụng truy cập và lấy dữ liệu thông qua procedure mà k cấp quyền truy cập cơ sở dữ liệu
   
 ### Nhược điểm
   * Không thể chạy debug stored procedure trong DBMS 
@@ -37,10 +36,10 @@ Write query
   
 #### 2.1 Cú pháp
 ```mysql
-  # Change end query default
+  	# Change end query default
 	DELIMITER //  
 	CREATE PROCEDURE sp_name
-	
+
 		BEGIN
 		SELECT * FROM products;
 		# end procedure
@@ -54,3 +53,25 @@ Write query
 
 ```
   
+#### 2.2 Biến
+
+##### 2.2.1 Khai báo
+
+```mysql
+	DECLARE variable_name datatype(size) DEFAULT default_value;
+```
+
+*Ví dụ*
+
+```mysql
+	DECLARE total_count INT DEFAULT 0;
+		SET total_count = 10;
+```
+
+```mysql
+	DECLARE total_products INT DEFAULT 0;
+	SELECT COUNT(*) INTO total_products
+	FROM products;
+```
+
+##### 2.2.2 Phạm vi biến
