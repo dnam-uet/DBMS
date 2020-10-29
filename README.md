@@ -229,3 +229,5 @@ Function và Procedure
 |Giá trị trả về| Có thể một hoặc nhiều giá trị| Chỉ giá trị trả về thông qua RETURN|
 |Tham số| IN, OUT, INOUT| Chỉ truyền tham trị|
 |Sử dụng proc/function| Một proc có thể dùng proc hay function bên trong nó| Chỉ sử dụng function bên trong nó|
+
+#### 2.6 Con trỏ
