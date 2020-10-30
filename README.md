@@ -229,7 +229,6 @@ Function và Procedure
 |Giá trị trả về| Có thể một hoặc nhiều giá trị| Chỉ giá trị trả về thông qua RETURN|
 |Tham số| IN, OUT, INOUT| Chỉ truyền tham trị|
 |Sử dụng proc/function| Một proc có thể dùng proc hay function bên trong nó| Chỉ sử dụng function bên trong nó|
-<<<<<<< HEAD
 ## 3. User
 ### 3.1 Create User
 *Bắt đầu với việc truy cập mysql bằng lệnh*
@@ -293,7 +292,3 @@ DROP USER ‘username’@‘your_ip’;
 ```mysql
 SHOW GRANTS FOR 'user_name'@'localhost';
 ```
-=======
-
-#### 2.6 Con trỏ
->>>>>>> 20174785115bcff3448467c7b0e63c6d6d8d297e
