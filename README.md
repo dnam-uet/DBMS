@@ -292,3 +292,24 @@ DROP USER ‘username’@‘your_ip’;
 ```mysql
 SHOW GRANTS FOR 'user_name'@'localhost';
 ```
+
+## 4. Triggger
+Khi có một event được thực hiện thì trigger tương ứng tự động được kích hoạt. Điều này khác với Store Procedure khi ta cần call procedure bằng lệnh để kích hoạt nó
+
+*Cú pháp*
+
+```mysql
+CREATE TRIGGER trig_name trig_time trig_event
+ON table_name
+FOR EACH ROW
+BEGIN
+
+END
+```
+
+Các tham số được truyền vào
+> Trig_time: BEFORE, AFTER
+> Trig_evnet: INSERT, UPDATE and DELETE
+
+*Mỗi một trigger chỉ có thể xử lý 1 event, nếu muốn xử lý nhiều event phải định nghĩa nhiều trigger*
+
