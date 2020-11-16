@@ -356,7 +356,7 @@ FROM film
 
 #### 5.1.2 Import file vào CSDL
 
-**Khi kiết xuất dữ liệu ra như thế nào thì khi thêm vào phải có trường thứ tự trùng như vậy. FILE và LINE cũng như vậy
+**Khi kiết xuất dữ liệu ra như thế nào thì khi thêm vào phải có trường thứ tự trùng như vậy. FILE và LINE cũng như vậy**
 
 Ví dụ: Load file film.txt vào bảng film1
 ```mysql
