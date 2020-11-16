@@ -436,3 +436,9 @@ SHOW MASTER STATUS;
 
 **Khi sử dụng câu lệnh mysqldump dùng option --flush-log sẽ tạo ra một file binlog mới.
 ==> Khi khôi phục dữ liệu chỉ cần dùng file binlog mới + file đã export ra từ mysqldump**
+
+**Đọc thông tin trong file bin log**
+
+``
+mysql\bin>mysqlbinlog.exe [path_of_file_bin_log] [>  name_of_file_export]
+``
