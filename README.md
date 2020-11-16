@@ -427,7 +427,7 @@ SHOW BINARY LOGS;
 SHOW MASTER STATUS;
 ```
 
-**Nếu chưa sử dụng mà muốn sử dụng thì:
+**Nếu chưa sử dụng mà muốn sử dụng thì:**
 
 1. Bật file cấu hình my.ini
 2. Tìm đến [mysqld]
@@ -435,4 +435,4 @@ SHOW MASTER STATUS;
 
 
 **Khi sử dụng câu lệnh mysqldump dùng option --flush-log sẽ tạo ra một file binlog mới.
-==> Khi khôi phục dữ liệu chỉ cần dùng file binlog mới + file đã export ra từ mysqldump
+==> Khi khôi phục dữ liệu chỉ cần dùng file binlog mới + file đã export ra từ mysqldump**
