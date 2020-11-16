@@ -405,3 +405,34 @@ mysqldump -u root -p database_name > database_name.sql
 *Options*
 1. --no-create-info : tạo file chỉ chứa data, không chứa lệnh tạo bảng
 2. --no-data : chỉ chứa các câu lệnh tạo bảng( tạo schema ), không chứa lệnh insert
+
+
+### 5.3 File binlog
+
+`
+File binlog lưu lịch sử các truy vấn trong cơ sở dữ liệu
+`
+`
+File binlog nằm trong thư mục data của mysql
+`
+
+*Kiểm tra database có dùng file binlog không*
+
+```mysql
+SHOW BINARY LOGS;
+```
+*Kiểm tra xem file mình đang chạy tại thời điểm này là file binlog nào*
+
+```mysql
+SHOW MASTER STATUS;
+```
+
+**Nếu chưa sử dụng mà muốn sử dụng thì:
+
+1. Bật file cấu hình my.ini
+2. Tìm đến [mysqld]
+3. Bỏ comment dòng **log-bin-mysql-bin** hoặc thêm chính nó vào file
+
+
+**Khi sử dụng câu lệnh mysqldump dùng option --flush-log sẽ tạo ra một file binlog mới.
+==> Khi khôi phục dữ liệu chỉ cần dùng file binlog mới + file đã export ra từ mysqldump
