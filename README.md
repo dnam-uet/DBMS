@@ -317,8 +317,8 @@ Các tham số được truyền vào
 
 MySQL cung cấp 2 keyword **OLD** và **NEW** cho phép việc viết trigger dễ dàng và hiệu quả hơn
 
-* OLD: trỏ đến các cột đã tồn tại trước khi thay đổi dữ liệu thông qua trigger
-* NEW: trỏ đến các cột mới sau khi thay đổi dữ liệu thông qua trigger
+*OLD: trỏ đến các cột đã tồn tại trước khi thay đổi dữ liệu thông qua trigger*
+*NEW: trỏ đến các cột mới sau khi thay đổi dữ liệu thông qua trigger*
 
 
 ## 5. Backup and restore
@@ -352,7 +352,7 @@ SELECT * INTO OUTFILE 'film.txt'
 FROM film
 ```
 
-*File film.txt sẽ lưu trong file mysql>data>sakila( database đang dùng )
+*File film.txt sẽ lưu trong file mysql>data>sakila( database đang dùng )*
 
 #### 5.1.2 Import file vào CSDL
 
@@ -375,30 +375,30 @@ LOAD DATA INFILE 'film.txt' INTO TABLE film1
 
 ### 5.2 Mức Database
 
-** mysqldump - khi muốn sao lưu 1 cơ sở dữ liệu
+**mysqldump - khi muốn sao lưu 1 cơ sở dữ liệu**
 
-**Cú pháp
+**Cú pháp**
 
 ```mysql
 mysqldump [options] > file.sql
 ```
 
-**Kiết xuất ra console
+**Kiết xuất ra console**
 
 `xampp>mysql>bin>mysqldump.exe -uroot -p sakila`
 
-**Kiết xuất ra 1 file
+**Kiết xuất ra 1 file**
 
 `xampp>mysql>bin>mysqldump.exe -uroot -p sakila > sakila.sql`
 ```mysql
 mysqldump -u root -p database_name > database_name.sql
 ```
 
-**Kiết xuất nhiều databases
+**Kiết xuất nhiều databases**
 
 `mysqldump -u root -p [options] --databases database_name_a [database_name_b...] > databases_a_b.sql`
 
-**Kiết xuất tất cả databases
+**Kiết xuất tất cả databases**
 
 `mysqldump -u root -p [options] --all-databases`
 
