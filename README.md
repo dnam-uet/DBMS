@@ -319,3 +319,89 @@ MySQL cung cấp 2 keyword **OLD** và **NEW** cho phép việc viết trigger d
 
 * OLD: trỏ đến các cột đã tồn tại trước khi thay đổi dữ liệu thông qua trigger
 * NEW: trỏ đến các cột mới sau khi thay đổi dữ liệu thông qua trigger
+
+
+## 5. Backup and restore
+
+### 5.1 Mức bảng
+
+#### 5.1.1 Kiết xuất file
+
+Ví dụ: Truy vấn bảng film
+```mysql
+SELECT * FROM film;
+```
+
+Lưu dữ liệu ra file film.txt
+```mysql
+SELECT * INTO OUTFILE 'film.txt'
+[
+	FIELDS
+		# Ngăn cách giữa các trường bằng
+		TERMINATED BY ','
+		# 
+		ESCAPED BY '*'
+		# Bao đóng trong cặp kí tự nào
+		ENCLOSED BY'"'
+	LINES
+		# Bắt đầu một dòng bằng
+		STARTING BY '<TR><TD>'
+		# Kết thúc một dòng bằng
+		TERMINATED BY '</TD></TR>\n'
+]
+FROM film
+```
+
+*File film.txt sẽ lưu trong file mysql>data>sakila( database đang dùng )
+
+#### 5.1.2 Import file vào CSDL
+
+**Khi kiết xuất dữ liệu ra như thế nào thì khi thêm vào phải có trường thứ tự trùng như vậy. FILE và LINE cũng như vậy
+
+Ví dụ: Load file film.txt vào bảng film1
+```mysql
+CREATE TABLE film1 LIKE film;
+LOAD DATA INFILE 'film.txt' INTO TABLE film1
+[
+	FIELDS
+		TERMINATED BY ','
+		ESCAPED BY '*'
+		ENCLOSED BY '"'
+	LINES
+		STARTING BY '<TR><TD>'
+		TERMINATED BY '</TD></TR>\n'
+]
+```
+
+### 5.2 Mức Database
+
+** mysqldump - khi muốn sao lưu 1 cơ sở dữ liệu
+
+**Cú pháp
+
+```mysql
+mysqldump [options] > file.sql
+```
+
+**Kiết xuất ra console
+
+`xampp>mysql>bin>mysqldump.exe -uroot -p sakila`
+
+**Kiết xuất ra 1 file
+
+`xampp>mysql>bin>mysqldump.exe -uroot -p sakila > sakila.sql`
+```mysql
+mysqldump -u root -p database_name > database_name.sql
+```
+
+**Kiết xuất nhiều databases
+
+`mysqldump -u root -p [options] --databases database_name_a [database_name_b...] > databases_a_b.sql`
+
+**Kiết xuất tất cả databases
+
+`mysqldump -u root -p [options] --all-databases`
+
+*Options*
+1. --no-create-info : tạo file chỉ chứa data, không chứa lệnh tạo bảng
+2. --no-data : chỉ chứa các câu lệnh tạo bảng( tạo schema ), không chứa lệnh insert
