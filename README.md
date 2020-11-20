@@ -499,11 +499,11 @@ DELIMITER ;
 DECLARE <action> HANDLER FOR <condition_value> <statement>;
 ```
 **Tham số**
-<action>: Có thể nhận hai giá trị CONTINUE hoặc EXIT.
-* CONTINUE: Nói với chương trình rằng khi lỗi xẩy ra hãy thực thi <statement> và tiếp tục.
-* EXIT: Nói với chương trình rằng khi lỗi xẩy ra hãy thực thi <statement> và thoát khỏi khối lệnh cha.
+action: Có thể nhận hai giá trị CONTINUE hoặc EXIT.
+* CONTINUE: Nói với chương trình rằng khi lỗi xẩy ra hãy thực thi statement và tiếp tục.
+* EXIT: Nói với chương trình rằng khi lỗi xẩy ra hãy thực thi statement và thoát khỏi khối lệnh cha.
 
-<condition_value>: Mô tả các đặc điểm của lỗi mà khi lỗi phát sinh, bộ điều khiển này sẽ được hoạt động. Nó có thể là:
+condition_value: Mô tả các đặc điểm của lỗi mà khi lỗi phát sinh, bộ điều khiển này sẽ được hoạt động. Nó có thể là:
 1.Một mã lỗi cụ thể (là một con số), ví dụ:
 1062 là lỗi khi trèn thêm một bản ghi mà ID của nó đã tồn tại.
 2.Một chuỗi string có 5 ký tự (Mã SQLSTATE chuẩn), ví dụ:
@@ -513,4 +513,3 @@ DECLARE <action> HANDLER FOR <condition_value> <statement>;
 SQLWARNING: là các cảnh báo mà có mã chuẩn bắt đầu bởi '01'.
 *NOTFOUND: là lớp các lỗi có mã chuẩn (SQLSTATE) bắt *đầu bởi '02'. Thường liên quan tới sử lý con trỏ.
 *SQLEXCEPTION: Là lớp các lỗi mà có mã chuẩn không bắt đầu bởi '00', '01', '02'. Chú ý rằng mã bắt đầu bởi '00' là các thông báo thành công.
-=======
