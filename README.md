@@ -292,7 +292,159 @@ DROP USER ‘username’@‘your_ip’;
 ```mysql
 SHOW GRANTS FOR 'user_name'@'localhost';
 ```
-# 4. Con trỏ (Cursor)
+
+
+## 4. Triggger
+Khi có một event được thực hiện thì trigger tương ứng tự động được kích hoạt. Điều này khác với Store Procedure khi ta cần call procedure bằng lệnh để kích hoạt nó
+
+###  4.1. Create trigger
+
+*Cú pháp*
+
+```mysql
+CREATE TRIGGER trig_name trig_time trig_event
+ON table_name
+FOR EACH ROW
+BEGIN
+
+END
+```
+
+Các tham số được truyền vào
+1. **Trig_time**: BEFORE, AFTER
+2. **Trig_event**: INSERT, UPDATE and DELETE
+
+*Mỗi một trigger chỉ có thể xử lý 1 event, nếu muốn xử lý nhiều event phải định nghĩa nhiều trigger*
+
+MySQL cung cấp 2 keyword **OLD** và **NEW** cho phép việc viết trigger dễ dàng và hiệu quả hơn
+
+*OLD: trỏ đến các cột đã tồn tại trước khi thay đổi dữ liệu thông qua trigger*
+*NEW: trỏ đến các cột mới sau khi thay đổi dữ liệu thông qua trigger*
+
+
+## 5. Backup and restore
+
+### 5.1 Mức bảng
+
+#### 5.1.1 Kiết xuất file
+
+Ví dụ: Truy vấn bảng film
+```mysql
+SELECT * FROM film;
+```
+
+Lưu dữ liệu ra file film.txt
+```mysql
+SELECT * INTO OUTFILE 'film.txt'
+[
+	FIELDS
+		# Ngăn cách giữa các trường bằng
+		TERMINATED BY ','
+		# 
+		ESCAPED BY '*'
+		# Bao đóng trong cặp kí tự nào
+		ENCLOSED BY'"'
+	LINES
+		# Bắt đầu một dòng bằng
+		STARTING BY '<TR><TD>'
+		# Kết thúc một dòng bằng
+		TERMINATED BY '</TD></TR>\n'
+]
+FROM film
+```
+
+*File film.txt sẽ lưu trong file mysql>data>sakila( database đang dùng )*
+
+#### 5.1.2 Import file vào CSDL
+
+**Khi kiết xuất dữ liệu ra như thế nào thì khi thêm vào phải có trường thứ tự trùng như vậy. FILE và LINE cũng như vậy**
+
+Ví dụ: Load file film.txt vào bảng film1
+```mysql
+CREATE TABLE film1 LIKE film;
+LOAD DATA INFILE 'film.txt' INTO TABLE film1
+[
+	FIELDS
+		TERMINATED BY ','
+		ESCAPED BY '*'
+		ENCLOSED BY '"'
+	LINES
+		STARTING BY '<TR><TD>'
+		TERMINATED BY '</TD></TR>\n'
+]
+```
+
+### 5.2 Mức Database
+
+**mysqldump - khi muốn sao lưu 1 cơ sở dữ liệu**
+
+**Cú pháp**
+
+```mysql
+mysqldump [options] > file.sql
+```
+
+**Kiết xuất ra console**
+
+`xampp>mysql>bin>mysqldump.exe -uroot -p sakila`
+
+**Kiết xuất ra 1 file**
+
+`xampp>mysql>bin>mysqldump.exe -uroot -p sakila > sakila.sql`
+```mysql
+mysqldump -u root -p database_name > database_name.sql
+```
+
+**Kiết xuất nhiều databases**
+
+`mysqldump -u root -p [options] --databases database_name_a [database_name_b...] > databases_a_b.sql`
+
+**Kiết xuất tất cả databases**
+
+`mysqldump -u root -p [options] --all-databases`
+
+*Options*
+1. --no-create-info : tạo file chỉ chứa data, không chứa lệnh tạo bảng
+2. --no-data : chỉ chứa các câu lệnh tạo bảng( tạo schema ), không chứa lệnh insert
+
+
+### 5.3 File binlog
+
+`
+File binlog lưu lịch sử các truy vấn trong cơ sở dữ liệu
+`
+`
+File binlog nằm trong thư mục data của mysql
+`
+
+*Kiểm tra database có dùng file binlog không*
+
+```mysql
+SHOW BINARY LOGS;
+```
+*Kiểm tra xem file mình đang chạy tại thời điểm này là file binlog nào*
+
+```mysql
+SHOW MASTER STATUS;
+```
+
+**Nếu chưa sử dụng mà muốn sử dụng thì:**
+
+1. Bật file cấu hình my.ini
+2. Tìm đến [mysqld]
+3. Bỏ comment dòng **log-bin-mysql-bin** hoặc thêm chính nó vào file
+
+
+**Khi sử dụng câu lệnh mysqldump dùng option --flush-log sẽ tạo ra một file binlog mới.
+==> Khi khôi phục dữ liệu chỉ cần dùng file binlog mới + file đã export ra từ mysqldump**
+
+**Đọc thông tin trong file bin log**
+
+``
+mysql\bin>mysqlbinlog.exe [path_of_file_bin_log] [>  name_of_file_export]
+``
+
+# 6. Con trỏ (Cursor)
 *Con trỏ là một câu lệnh select, được định nghĩa trong phần khai báo trong MySQL*
 Cú pháp
 ```mysql
@@ -340,7 +492,7 @@ BEGIN
 END $$
 DELIMITER ;
 ```
-# 5. Handler
+# 7. Handler
 *Cú pháp*
 ```mysql
 	
@@ -361,3 +513,4 @@ DECLARE <action> HANDLER FOR <condition_value> <statement>;
 SQLWARNING: là các cảnh báo mà có mã chuẩn bắt đầu bởi '01'.
 *NOTFOUND: là lớp các lỗi có mã chuẩn (SQLSTATE) bắt *đầu bởi '02'. Thường liên quan tới sử lý con trỏ.
 *SQLEXCEPTION: Là lớp các lỗi mà có mã chuẩn không bắt đầu bởi '00', '01', '02'. Chú ý rằng mã bắt đầu bởi '00' là các thông báo thành công.
+=======
