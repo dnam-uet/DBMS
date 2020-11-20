@@ -510,6 +510,6 @@ condition_value: Mô tả các đặc điểm của lỗi mà khi lỗi phát si
   * HY000 là mã lỗi nói rằng ổ đĩa bị đầy.
   * HY001 là lỗi do tràn bộ nhớ.
 * Một lớp lỗi thông dụng đã được MySQL đặt tên hoặc có thể do người dùng đặt tên, chẳng hạn:
-  *SQLWARNING: là các cảnh báo mà có mã chuẩn bắt đầu bởi '01'.
-  *NOTFOUND: là lớp các lỗi có mã chuẩn (SQLSTATE) bắt *đầu bởi '02'. Thường liên quan tới sử lý con trỏ.
-  *SQLEXCEPTION: Là lớp các lỗi mà có mã chuẩn không bắt đầu bởi '00', '01', '02'. Chú ý rằng mã bắt đầu bởi '00' là các thông báo thành công.
+  * SQLWARNING: là các cảnh báo mà có mã chuẩn bắt đầu bởi '01'.
+  * NOTFOUND: là lớp các lỗi có mã chuẩn (SQLSTATE) bắt *đầu bởi '02'. Thường liên quan tới sử lý con trỏ.
+  * SQLEXCEPTION: Là lớp các lỗi mà có mã chuẩn không bắt đầu bởi '00', '01', '02'. Chú ý rằng mã bắt đầu bởi '00' là các thông báo thành công.
