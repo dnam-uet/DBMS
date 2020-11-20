@@ -292,3 +292,72 @@ DROP USER ‘username’@‘your_ip’;
 ```mysql
 SHOW GRANTS FOR 'user_name'@'localhost';
 ```
+# 4. Con trỏ (Cursor)
+*Con trỏ là một câu lệnh select, được định nghĩa trong phần khai báo trong MySQL*
+Cú pháp
+```mysql
+DECLARE cursor_name CURSOR FOR  
+Select statement;  
+```
+
+**Các tham số**
+cursor_name: tên con trỏ
+
+select_statement: Câu truy vấn
+### Mở con trỏ
+```mysql
+Open cursor_name;  
+```
+### Nạp con trỏ
+```mysql
+FETCH [ NEXT [ FROM ] ] cursor_name INTO variable_list; 
+```
+**Tham số:**
+cursor_name: tên con trỏ
+
+variable_list: các biến, dấu phẩy, v.v. được lưu trữ trong một con trỏ cho tập kết quả
+### Đóng con trỏ
+```mysql
+  Close cursor_name;  
+```
+*Ví dụ*
+```mysql
+DELIMITER $$
+CREATE PROCEDURE getActor(OUT a_name VARCHAR(200) )
+BEGIN
+	DECLARE is_done INT DEFAULT 0;
+    DECLARE act_cursor CURSOR FOR
+    	SELECT first_name FROM actor;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET is_done = 1;
+    OPEN act_cursor;
+    get_list: LOOP
+    FETCH act_cursor INTO a_name;
+    IF( is_done) = 1 THEN
+    LEAVE get_list;
+    END IF;
+    END LOOP get_list;
+    CLOSE act_cursor;
+END $$
+DELIMITER ;
+```
+# 5. Handler
+*Cú pháp*
+```mysql
+	
+DECLARE <action> HANDLER FOR <condition_value> <statement>;
+```
+**Tham số**
+<action>: Có thể nhận hai giá trị CONTINUE hoặc EXIT.
+* CONTINUE: Nói với chương trình rằng khi lỗi xẩy ra hãy thực thi <statement> và tiếp tục.
+* EXIT: Nói với chương trình rằng khi lỗi xẩy ra hãy thực thi <statement> và thoát khỏi khối lệnh cha.
+
+<condition_value>: Mô tả các đặc điểm của lỗi mà khi lỗi phát sinh, bộ điều khiển này sẽ được hoạt động. Nó có thể là:
+1.Một mã lỗi cụ thể (là một con số), ví dụ:
+1062 là lỗi khi trèn thêm một bản ghi mà ID của nó đã tồn tại.
+2.Một chuỗi string có 5 ký tự (Mã SQLSTATE chuẩn), ví dụ:
+*HY000 là mã lỗi nói rằng ổ đĩa bị đầy.
+*HY001 là lỗi do tràn bộ nhớ.
+3.Một lớp lỗi thông dụng đã được MySQL đặt tên hoặc có thể do người dùng đặt tên, chẳng hạn:
+SQLWARNING: là các cảnh báo mà có mã chuẩn bắt đầu bởi '01'.
+*NOTFOUND: là lớp các lỗi có mã chuẩn (SQLSTATE) bắt *đầu bởi '02'. Thường liên quan tới sử lý con trỏ.
+*SQLEXCEPTION: Là lớp các lỗi mà có mã chuẩn không bắt đầu bởi '00', '01', '02'. Chú ý rằng mã bắt đầu bởi '00' là các thông báo thành công.
