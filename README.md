@@ -513,3 +513,7 @@ condition_value: Mô tả các đặc điểm của lỗi mà khi lỗi phát si
   * SQLWARNING: là các cảnh báo mà có mã chuẩn bắt đầu bởi '01'.
   * NOTFOUND: là lớp các lỗi có mã chuẩn (SQLSTATE) bắt *đầu bởi '02'. Thường liên quan tới sử lý con trỏ.
   * SQLEXCEPTION: Là lớp các lỗi mà có mã chuẩn không bắt đầu bởi '00', '01', '02'. Chú ý rằng mã bắt đầu bởi '00' là các thông báo thành công.
+  
+# 8. Replication
+https://kipalog.com/posts/Gioi-thieu-MySQL-Replication
+https://medium.com/@trungnt9/database-replication-p1-f6f30cef7aef
