@@ -22,7 +22,7 @@ Write query
 SELECT data FROM view_name
 ```
 
-## 2. Procedure
+## 2.  Procedure
 
 ### Ưu điểm
 
