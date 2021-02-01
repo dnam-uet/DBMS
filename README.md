@@ -519,4 +519,3 @@ https://kipalog.com/posts/Gioi-thieu-MySQL-Replication
 https://medium.com/@trungnt9/database-replication-p1-f6f30cef7aef
 https://dev.mysql.com/doc/refman/8.0/en/replication.html#:~:text=Replication%20enables%20data%20from%20one,receive%20updates%20from%20a%20source.
 
-# HẾT MÔN RỒIIIIII
