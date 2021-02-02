@@ -1,5 +1,5 @@
 # My note of DBMS Subject in UET
-## Teacher's email: hanhdp@gmail.com
+## Teacher's email: hanhdp@gmail.com.
 
 ## 1. View 
 
